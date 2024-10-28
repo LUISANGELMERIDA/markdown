@@ -1,21 +1,36 @@
-const path = require("path");
-
-module.exports = {
-
-    entry: "./src/index,js",
-    output: {
-        path: path.join(__dirname, "/dist"),
-        filename: "bundle.js"
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const basePath = __dirname;
+const distPath = 'dist';
+ 
+const indextInput = './src/index.html';
+const indexOutput = 'index.html';
+const webpackInitConfig = {
+    mode: 'development',
+    resolve: {
+        extensions: ['.js']
     },
-    modules: {
-        rules:[]
+    entry: {
+        app: ['@babel/polyfill', './src/index.js'],
+    },
+    output: {
+        path: path.join(basePath, distPath),
+        filename: '[chunkhash][name].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
+            }
+        ]
     },
     plugins: [
-        new HtmlwebpackPlugin({
-            template: "./src/index.html"
-
-        }
-            
-        )
+        new HTMLWebpackPlugin({
+            filename: indexOutput, 
+            template: indextInput,
+        })
     ]
-}
+};
+module.exports = webpackInitConfig;
