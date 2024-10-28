@@ -8,7 +8,7 @@ const indexOutput = 'index.html';
 const webpackInitConfig = {
     mode: 'development',
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js','.jsx']
     },
     entry: {
         app: ['@babel/polyfill', './src/index.js'],
@@ -20,7 +20,7 @@ const webpackInitConfig = {
     module: {
         rules: [
             {
-                test: /\.js/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             }
