@@ -11,11 +11,11 @@ const webpackInitConfig = {
         extensions: ['.js','.jsx']
     },
     entry: {
-        app: ['@babel/polyfill', './src/index.js'],
+        app: ['@babel/polyfill', './src/components/App.js'],
     },
     output: {
         path: path.join(basePath, distPath),
-        filename: '[chunkhash][name].js'
+        filename: '[chunkhash][main].js'
     },
     module: {
         rules: [
